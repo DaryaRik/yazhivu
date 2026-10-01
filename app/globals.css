@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+/*
+  ЯЖИВУ — глобальные стили и дизайн-переменные.
+  Атмосфера: строгая, концертная, документальная.
+  Жёлтый — только акцент. Без градиентов, скруглений-SaaS, пастели и неона.
+*/
+
+:root {
+  --color-black: #0b0b0b;
+  --color-white: #ffffff;
+  --color-yellow: #f2c400;
+  --color-paper: #f3f0e7;
+  --color-dark-gray: #242424;
+}
+
+/* Проброс переменных в Tailwind v4, чтобы работали утилиты bg-black, text-yellow и т.д. */
+@theme inline {
+  --color-black: var(--color-black);
+  --color-white: var(--color-white);
+  --color-yellow: var(--color-yellow);
+  --color-paper: var(--color-paper);
+  --color-dark-gray: var(--color-dark-gray);
+
+  --font-sans: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  /* Запрет горизонтальной прокрутки */
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--color-paper);
+  color: var(--color-black);
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  /* Дополнительная защита от горизонтального скролла */
+  overflow-x: hidden;
+}
+
+/* Плавный скролл к якорям с учётом фиксированной шапки */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+}
+
+/* Заметный фокус для доступности */
+:focus-visible {
+  outline: 2px solid var(--color-yellow);
+  outline-offset: 3px;
+}
+
+/* Уважаем настройку пользователя об уменьшении движения */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
