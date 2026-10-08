@@ -1,9 +1,8 @@
 /**
  * Единый источник конфигурации сайта группы ЯЖИВУ.
  *
- * ВАЖНО: все внешние ссылки, контакты и адрес сайта пока пустые.
- * Заполняйте их ТОЛЬКО реальными данными — компоненты автоматически
- * скрывают то, что не заполнено (соцсети, музыкальные ссылки, контакты).
+ * Заполняйте поля ТОЛЬКО реальными данными — компоненты автоматически скрывают
+ * то, что не заполнено (соцсети, музыкальные ссылки, контакты).
  */
 
 export type NavItem = {
@@ -21,11 +20,15 @@ export type SocialLinks = {
 };
 
 export type MusicLinks = {
+  /** Ссылка-агрегатор (одна на все площадки) */
+  bandlink: string;
   yandexMusic: string;
   vkMusic: string;
   youtubeMusic: string;
   spotify: string;
   appleMusic: string;
+  /** Звук */
+  zvuk: string;
 };
 
 export type Contacts = {
@@ -37,7 +40,7 @@ export type SiteConfig = {
   name: string;
   tagline: string;
   description: string;
-  /** Временная заглушка. Заменить на реальный домен после деплоя на Vercel. */
+  /** Адрес сайта — используется для OG-превью и canonical-ссылок. */
   url: string;
   navigation: NavItem[];
   socialLinks: SocialLinks;
@@ -50,8 +53,7 @@ export const siteConfig: SiteConfig = {
   tagline: "ЯЖИВУ — СЕЙЧАС!",
   description: "Музыка для тех, кто продолжает.",
 
-  // TODO: заменить на реальный домен (например, https://yazhivu.ru)
-  url: "",
+  url: "https://yazhivu-band.ru",
 
   navigation: [
     { label: "Музыка", href: "#music" },
@@ -64,24 +66,26 @@ export const siteConfig: SiteConfig = {
     { label: "Контакты", href: "#contacts" },
   ],
 
-  // TODO: вставить реальные адреса профилей. Пустая строка = ссылка скрыта.
+  // Пустая строка = ссылка скрыта.
   socialLinks: {
-    vk: "",
-    telegram: "",
-    youtube: "",
+    vk: "https://vk.ru/i_live_mus",
+    telegram: "https://t.me/i_live_mus",
+    youtube: "https://www.youtube.com/watch?v=k3tarLLKayI",
     instagram: "",
   },
 
-  // TODO: вставить реальные ссылки на площадки. Пустая строка = ссылка скрыта.
+  // Пустая строка = ссылка скрыта. Bandlink — агрегатор, ведёт сразу на все площадки.
   musicLinks: {
-    yandexMusic: "",
+    bandlink: "https://band.link/i_live_mus",
+    yandexMusic: "https://music.yandex.ru/artist/25771538",
     vkMusic: "",
     youtubeMusic: "",
-    spotify: "",
-    appleMusic: "",
+    spotify: "https://open.spotify.com/artist/4q6SAtvyPra88N0uuYf10w",
+    appleMusic: "https://music.apple.com/ru/artist/яживу/1891385834",
+    zvuk: "https://zvuk.com/artist/214195683",
   },
 
-  // TODO: вставить реальные контакты. Пустая строка = контакт скрыт.
+  // Пустая строка = контакт скрыт.
   contacts: {
     email: "",
     phone: "",
