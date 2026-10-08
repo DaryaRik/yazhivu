@@ -4,7 +4,7 @@ import SectionLabel from "@/components/SectionLabel";
 import SubscribeForm from "@/components/SubscribeForm";
 import { siteConfig } from "@/config/site";
 import { musicReleases } from "@/data/music";
-import { concerts } from "@/data/concerts";
+import { concerts, formatConcertDate } from "@/data/concerts";
 import { news } from "@/data/news";
 
 /**
@@ -13,8 +13,22 @@ import { news } from "@/data/news";
  * сложных анимаций, магазина, оплаты, CMS и реальной отправки форм.
  */
 
+const MUSIC_LINK_LABELS: Record<string, string> = {
+  bandlink: "Bandlink — все площадки",
+  yandexMusic: "Яндекс Музыка",
+  vkMusic: "VK Музыка",
+  youtubeMusic: "YouTube Music",
+  spotify: "Spotify",
+  appleMusic: "Apple Music",
+  zvuk: "Звук",
+};
+
 export default function Home() {
   const telegramUrl = siteConfig.socialLinks.telegram.trim();
+
+  const musicPlatforms = Object.entries(siteConfig.musicLinks)
+    .filter(([, url]) => url.trim() !== "")
+    .map(([key, url]) => ({ key, url, label: MUSIC_LINK_LABELS[key] ?? key }));
 
   return (
     <>
@@ -143,18 +157,23 @@ export default function Home() {
               </ul>
             )}
 
-            {/* Кнопка «Слушать всё»: неактивна, пока нет релизов и ссылок */}
-            <div className="mt-8">
-              <button
-                type="button"
-                disabled={musicReleases.length === 0}
-                aria-label="Слушать все релизы"
-                aria-disabled={musicReleases.length === 0}
-                className="border border-white/30 px-8 py-4 text-sm font-bold uppercase tracking-[0.15em] text-white transition-colors enabled:hover:border-yellow enabled:hover:text-yellow disabled:cursor-not-allowed disabled:opacity-40"
-              >
-                Слушать всё
-              </button>
-            </div>
+            {/* Ссылки на площадки: показываются только заполненные в config/site.ts */}
+            {musicPlatforms.length > 0 && (
+              <ul className="mt-10 flex flex-wrap gap-3">
+                {musicPlatforms.map(({ key, url, label }) => (
+                  <li key={key}>
+                    <a
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block border border-white/30 px-6 py-3 text-sm font-bold uppercase tracking-[0.15em] text-white transition-colors hover:border-yellow hover:text-yellow"
+                    >
+                      {label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </section>
 
@@ -184,20 +203,28 @@ export default function Home() {
                 {concerts.map((concert) => (
                   <li
                     key={concert.id}
-                    className="flex flex-col gap-2 py-6 sm:flex-row sm:items-center sm:justify-between"
+                    className="flex flex-col gap-4 py-6 sm:flex-row sm:items-center sm:justify-between"
                   >
                     <div className="flex flex-col gap-1">
                       <span className="text-lg font-bold uppercase">
-                        {concert.city}
+                        {concert.city} · {concert.venue}
                       </span>
-                      <span className="text-sm text-black/60">
-                        {concert.venue}
-                      </span>
+                      {concert.address && (
+                        <span className="text-sm text-black/60">
+                          {concert.address}
+                        </span>
+                      )}
+                      {(concert.doorsTime || concert.time) && (
+                        <span className="text-sm text-black/60">
+                          {concert.doorsTime ? `Двери ${concert.doorsTime}` : ""}
+                          {concert.doorsTime && concert.time ? " · " : ""}
+                          {concert.time ? `начало ${concert.time}` : ""}
+                        </span>
+                      )}
                     </div>
-                    <div className="flex items-center gap-6">
+                    <div className="flex flex-col items-start gap-3 sm:items-end">
                       <span className="text-sm font-bold uppercase tracking-wide">
-                        {concert.date}
-                        {concert.time ? ` · ${concert.time}` : ""}
+                        {formatConcertDate(concert.date)}
                       </span>
                       {concert.registrationUrl && (
                         <a
@@ -206,7 +233,7 @@ export default function Home() {
                           rel="noopener noreferrer"
                           className="border border-black px-5 py-2 text-xs font-bold uppercase tracking-[0.15em] transition-colors hover:bg-yellow hover:border-yellow"
                         >
-                          Регистрация
+                          Вход по регистрации
                         </a>
                       )}
                     </div>
