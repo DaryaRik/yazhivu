@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
@@ -41,11 +42,17 @@ export default function Home() {
           className="relative bg-black text-white"
           aria-labelledby="hero-title"
         >
-          {/* Структурная заглушка под будущее hero-изображение (public/images/hero) */}
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 bg-dark-gray"
+          {/* Фоновое изображение hero (public/images/hero) */}
+          <Image
+            src="/images/hero/hero-01.jpg"
+            alt="Группа ЯЖИВУ в поле на закате"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center"
           />
+          {/* Затемнение, чтобы текст читался поверх фото */}
+          <div aria-hidden="true" className="absolute inset-0 bg-black/55" />
           <div className="relative mx-auto flex min-h-[80vh] w-full max-w-6xl flex-col justify-center px-5 py-24">
             <SectionLabel number="01" title="HERO" inverted />
             <h1
@@ -74,6 +81,26 @@ export default function Home() {
           </div>
         </section>
 
+        {/* 01b / HERO II — широкий кадр */}
+        <section
+          aria-label="Группа ЯЖИВУ"
+          className="relative bg-black text-white"
+        >
+          <div className="relative min-h-[60vh] w-full">
+            <Image
+              src="/images/hero/hero-02.jpg"
+              alt="ЯЖИВУ — группа на траве в сумерках"
+              fill
+              sizes="100vw"
+              className="object-cover object-center"
+            />
+            <div aria-hidden="true" className="absolute inset-0 bg-black/40" />
+            <p className="absolute bottom-8 left-1/2 w-[90%] max-w-6xl -translate-x-1/2 text-2xl font-black uppercase tracking-tight text-white sm:text-4xl lg:text-5xl">
+              ЯЖИВУ — СЕЙЧАС!
+            </p>
+          </div>
+        </section>
+
         {/* 02 / КТО МЫ */}
         <section
           id="about"
@@ -95,14 +122,26 @@ export default function Home() {
                   рассказ о том, кто мы и зачем делаем эту музыку.
                 </p>
               </div>
-              {/* Место для будущей фотографии группы (public/images/group) */}
-              <div
-                aria-hidden="true"
-                className="flex min-h-64 items-center justify-center border border-black/15 bg-dark-gray/5"
-              >
-                <span className="text-xs font-bold uppercase tracking-[0.2em] text-black/30">
-                  Фото группы — скоро
-                </span>
+              {/* Фотографии группы (public/images/group) */}
+              <div className="flex flex-col gap-4">
+                <div className="relative aspect-[4/3] w-full overflow-hidden border border-black/15">
+                  <Image
+                    src="/images/group/group-01.jpg"
+                    alt="Группа ЯЖИВУ — ночной портрет"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover object-center"
+                  />
+                </div>
+                <div className="relative aspect-[3/4] w-full max-w-xs overflow-hidden border border-black/15">
+                  <Image
+                    src="/images/group/group-02.jpg"
+                    alt="Солистка ЯЖИВУ"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 25vw"
+                    className="object-cover object-center"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -241,6 +280,28 @@ export default function Home() {
                 ))}
               </ul>
             )}
+
+            {/* Концертные кадры (public/images/concerts) */}
+            <div className="mt-12 grid gap-4 sm:grid-cols-2">
+              <div className="relative aspect-[3/2] w-full overflow-hidden border border-black/15">
+                <Image
+                  src="/images/concerts/live-01.jpg"
+                  alt="ЯЖИВУ — силуэты на гребне у дерева"
+                  fill
+                  sizes="(max-width: 640px) 100vw, 50vw"
+                  className="object-cover object-center"
+                />
+              </div>
+              <div className="relative aspect-[3/2] w-full overflow-hidden border border-black/15">
+                <Image
+                  src="/images/concerts/live-02.jpg"
+                  alt="ЯЖИВУ — концертный кадр"
+                  fill
+                  sizes="(max-width: 640px) 100vw, 50vw"
+                  className="object-cover object-center"
+                />
+              </div>
+            </div>
           </div>
         </section>
 
@@ -285,20 +346,37 @@ export default function Home() {
               <p>Делитесь своим «я живу».</p>
               <p>Вдохновляй других.</p>
             </div>
-            {/* Структурное место для будущих настоящих материалов сообщества
-                (public/images/community) */}
-            <div
-              aria-hidden="true"
-              className="mt-10 grid gap-4 sm:grid-cols-3"
-            >
-              {[0, 1, 2].map((i) => (
+            {/* Галерея сообщества (public/images/community) */}
+            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                {
+                  src: "/images/community/community-01.jpg",
+                  alt: "ЯЖИВУ — кадр с поднятой рукой",
+                },
+                {
+                  src: "/images/community/community-02.jpg",
+                  alt: "ЯЖИВУ — кадр у дерева",
+                },
+                {
+                  src: "/images/community/community-03.jpg",
+                  alt: "ЯЖИВУ — на фоне неба",
+                },
+                {
+                  src: "/images/community/community-04.jpg",
+                  alt: "ЯЖИВУ — на поле",
+                },
+              ].map((photo) => (
                 <div
-                  key={i}
-                  className="flex min-h-48 items-center justify-center border border-black/15 bg-dark-gray/5"
+                  key={photo.src}
+                  className="relative aspect-[3/4] w-full overflow-hidden border border-black/15"
                 >
-                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-black/30">
-                    Материалы — скоро
-                  </span>
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    className="object-cover object-center"
+                  />
                 </div>
               ))}
             </div>
@@ -326,6 +404,28 @@ export default function Home() {
               Музыка, карточки, вещи и маленькие действия, которые остаются с
               тобой после концерта.
             </p>
+
+            {/* Кадры, из которых собирается первый выпуск BOX (public/images/box) */}
+            <div className="mt-10 grid gap-4 sm:grid-cols-2">
+              <div className="relative aspect-[3/2] w-full overflow-hidden border border-white/15">
+                <Image
+                  src="/images/box/box-01.jpg"
+                  alt="ЯЖИВУ — кадр для первого выпуска BOX"
+                  fill
+                  sizes="(max-width: 640px) 100vw, 50vw"
+                  className="object-cover object-center"
+                />
+              </div>
+              <div className="relative aspect-[3/2] w-full overflow-hidden border border-white/15">
+                <Image
+                  src="/images/box/box-02.jpg"
+                  alt="ЯЖИВУ — деталь для первого выпуска BOX"
+                  fill
+                  sizes="(max-width: 640px) 100vw, 50vw"
+                  className="object-cover object-center"
+                />
+              </div>
+            </div>
 
             <div className="mt-10">
               {telegramUrl ? (
