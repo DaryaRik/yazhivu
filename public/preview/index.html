@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta name="robots" content="noindex,nofollow"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>ЯЖИВУ — макет Hero (стиль А «Плёнка», v2)</title>
+<style>
+@font-face{font-family:'Oswald';src:url('fonts/oswald-cyrillic-700-normal.woff2') format('woff2');font-weight:700;font-display:swap;unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Oswald';src:url('fonts/oswald-cyrillic-500-normal.woff2') format('woff2');font-weight:500;font-display:swap;unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Oswald';src:url('fonts/oswald-latin-700-normal.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Oswald';src:url('fonts/oswald-latin-500-normal.woff2') format('woff2');font-weight:500;font-display:swap}
+:root{
+  --ink:#0a0a0a; --ink2:#131313; --line:rgba(255,255,255,.14);
+  /* UI-акцент — фирменный жёлтый. Для фото — глубокое тёплое золото. */
+  --yellow:#e8bc0a; --gold:#c69a08; --txt:#f3efe6; --mut:rgba(243,239,230,.55);
+  --mono:ui-monospace,'DejaVu Sans Mono',monospace;
+  --disp:'Oswald','DejaVu Sans',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:var(--ink);color:var(--txt);font-family:var(--disp);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* ---------- ЗЕРНО ---------- */
+.grain{position:fixed;inset:0;z-index:99;pointer-events:none;opacity:.10;mix-blend-mode:soft-light}
+.grain::before{content:'';position:absolute;inset:-150%;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 7s steps(9) infinite}
+@keyframes grain{
+ 0%{transform:translate(0,0)}10%{transform:translate(-6%,-8%)}20%{transform:translate(-12%,4%)}
+ 30%{transform:translate(6%,-12%)}40%{transform:translate(-4%,14%)}50%{transform:translate(-14%,6%)}
+ 60%{transform:translate(10%,0)}70%{transform:translate(0,10%)}80%{transform:translate(3%,-6%)}
+ 90%{transform:translate(-8%,4%)}100%{transform:translate(0,0)}}
+/* виньетка — собирает взгляд, добавляет плёночной глубины */
+.vignette{position:fixed;inset:0;z-index:98;pointer-events:none;
+  background:radial-gradient(130% 100% at 50% 40%,transparent 55%,rgba(0,0,0,.55) 100%)}
+
+/* ---------- HEADER ---------- */
+header{position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:24px;
+  padding:20px 40px;border-bottom:1px solid var(--line)}
+.logo{font-weight:700;font-size:26px;letter-spacing:.02em;color:var(--yellow);text-transform:uppercase}
+nav{display:flex;gap:26px;flex-wrap:wrap}
+nav a{color:var(--mut);text-decoration:none;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;transition:.2s}
+nav a:hover{color:var(--yellow)}
+.socs{display:flex;gap:10px}
+.socs i{width:30px;height:30px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;
+  font-style:normal;font-family:var(--mono);font-size:10px;color:var(--mut)}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;min-height:calc(100vh - 73px);display:grid;grid-template-columns:1.05fr .95fr;
+  align-items:center;gap:56px;padding:60px 40px 80px;overflow:hidden}
+.hero .ghost{position:absolute;right:-3%;bottom:4%;font-weight:700;font-size:200px;line-height:.8;
+  color:transparent;-webkit-text-stroke:1px rgba(243,239,230,.07);pointer-events:none;white-space:nowrap;user-select:none;letter-spacing:.02em}
+.hero__left{position:relative;z-index:2}
+.kicker{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:11px;letter-spacing:.3em;
+  color:var(--yellow);text-transform:uppercase;margin-bottom:26px}
+.kicker b{display:inline-block;padding:3px 8px;border:1px solid var(--yellow);font-weight:400}
+h1{font-weight:700;font-size:clamp(60px,9.6vw,150px);line-height:.92;letter-spacing:-.005em;text-transform:uppercase;color:var(--yellow)}
+h1 .now{display:block;color:transparent;-webkit-text-stroke:1.1px var(--yellow);margin-top:14px;
+  font-size:.46em;letter-spacing:.06em;opacity:.92}
+.tag{margin-top:30px;max-width:440px;color:var(--mut);font-weight:500;font-size:19px;line-height:1.55}
+.btns{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap}
+.btn{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;padding:16px 28px;
+  text-decoration:none;border:1px solid var(--yellow);transition:.2s;display:inline-block}
+.btn.fill{background:var(--yellow);color:#000}
+.btn.fill:hover{background:transparent;color:var(--yellow)}
+.btn.ghostbtn{border-color:rgba(243,239,230,.4);color:var(--txt)}
+.btn.ghostbtn:hover{border-color:var(--yellow);color:var(--yellow)}
+
+/* ---------- ФОТО: НАСТОЯЩИЙ ДЮОТОН + РАСТР ---------- */
+.hero__right{position:relative;z-index:2}
+.duo{position:relative;overflow:hidden;border:1px solid var(--line);transform:rotate(-1.4deg);
+  background:#0a0800;box-shadow:20px 20px 0 rgba(198,154,8,.14)}
+.duo img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;
+  filter:url(#duotone) contrast(1.05)}
+/* халфтон — тонкая печатная точка, только в тенях */
+.duo .dots{position:absolute;inset:0;mix-blend-mode:soft-light;opacity:.45;
+  background-image:radial-gradient(rgba(0,0,0,.9) .9px,transparent 1.1px);background-size:4px 4px}
+.duo .cap{position:absolute;left:14px;bottom:12px;z-index:3;font-family:var(--mono);font-size:10px;
+  letter-spacing:.2em;color:#000;background:var(--yellow);padding:4px 8px;text-transform:uppercase}
+.badge{position:absolute;top:-30px;left:-34px;width:128px;height:128px;z-index:4;animation:spin 16s linear infinite}
+.badge svg{width:100%;height:100%}
+.badge text{fill:var(--yellow);font-family:var(--mono);font-size:12.5px;letter-spacing:.2em}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- БЕГУЩАЯ СТРОКА ---------- */
+.marquee{position:relative;overflow:hidden;background:var(--yellow);color:#000;
+  border-top:2px solid #000;border-bottom:2px solid #000;padding:14px 0;white-space:nowrap}
+.marquee__in{display:inline-block;animation:slide 30s linear infinite;font-weight:700;
+  font-size:26px;letter-spacing:.04em;text-transform:uppercase}
+.marquee__in span{padding:0 28px}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- ДИАГОНАЛЬНАЯ ЛЕНТА ---------- */
+.ribbon{position:relative;height:150px;overflow:hidden;background:var(--ink)}
+.ribbon__bar{position:absolute;left:-6%;top:44px;width:112%;transform:rotate(-3.2deg);background:var(--yellow);
+  padding:12px 0;overflow:hidden;box-shadow:0 12px 40px rgba(198,154,8,.25)}
+.ribbon__in{display:inline-block;white-space:nowrap;animation:slide 24s linear infinite;color:#000;
+  font-weight:700;font-size:22px;letter-spacing:.12em;text-transform:uppercase}
+.ribbon__in span{padding:0 20px}
+
+/* ---------- ДАТЫ (с фоном-фото) ---------- */
+.dates{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.date{padding:34px 26px 30px;border-right:1px solid var(--line);position:relative;overflow:hidden;min-height:200px;
+  display:flex;flex-direction:column;justify-content:flex-end}
+.date:last-child{border-right:none}
+.date .bg{position:absolute;inset:0;z-index:0}
+.date .bg img{width:100%;height:100%;object-fit:cover;filter:url(#duotone) brightness(.8);opacity:.5}
+.date .bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,.5),rgba(10,10,10,.92))}
+.date>*{position:relative;z-index:1}
+.date .n{font-family:var(--mono);font-size:11px;letter-spacing:.24em;color:var(--yellow)}
+.date h3{margin:10px 0 6px;font-size:28px;text-transform:uppercase;line-height:1}
+.date p{color:var(--mut);font-family:var(--mono);font-size:11px;letter-spacing:.1em}
+.date .st{position:absolute;top:30px;right:26px;z-index:2;font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+  color:#000;background:var(--yellow);padding:4px 8px}
+
+/* ---------- МОБИЛЬНЫЙ ---------- */
+@media(max-width:860px){
+ header{padding:16px 20px;flex-wrap:wrap;gap:14px}
+ nav{display:none}
+ .hero{grid-template-columns:1fr;gap:38px;padding:40px 20px 60px;min-height:auto}
+ h1{font-size:clamp(58px,16vw,104px);line-height:.94}
+ h1 .now{margin-top:10px}
+ .hero .ghost{font-size:108px;bottom:1%}
+ .badge{width:96px;height:96px;left:-14px;top:-20px}
+ .dates{grid-template-columns:1fr}
+ .date{border-right:none;border-bottom:1px solid var(--line);min-height:150px}
+ .marquee__in{font-size:20px}
+ .grain{opacity:.07}
+}
+</style>
+</head>
+<body>
+<!-- SVG-фильтр ДЮОТОНА: тени -> почти чёрный, света -> глубокое золото -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <filter id="duotone" color-interpolation-filters="sRGB">
+  <feColorMatrix type="matrix"
+    values="0.33 0.34 0.33 0 0
+            0.33 0.34 0.33 0 0
+            0.33 0.34 0.33 0 0
+            0    0    0    1 0"/>
+  <feComponentTransfer>
+   <feFuncR tableValues="0.06 0.82"/>
+   <feFuncG tableValues="0.05 0.62"/>
+   <feFuncB tableValues="0.02 0.06"/>
+  </feComponentTransfer>
+ </filter>
+</svg>
+
+<div class="grain"></div>
+<div class="vignette"></div>
+
+<header>
+ <div class="logo">ЯЖИВУ</div>
+ <nav>
+  <a href="#">Музыка</a><a href="#">Концерты</a><a href="#">О нас</a><a href="#">Сообщество</a>
+  <a href="#">Мерч</a><a href="#">Новости</a><a href="#">Контакты</a>
+ </nav>
+ <div class="socs"><i>VK</i><i>TG</i><i>YT</i></div>
+</header>
+
+<section class="hero">
+ <div class="ghost">ЖИВИ СЕЙЧАС</div>
+ <div class="hero__left">
+  <div class="kicker"><b>01</b> Hero · Казань</div>
+  <h1>ЯЖИВУ<span class="now">— сейчас!</span></h1>
+  <p class="tag">Музыка для тех, кто продолжает. Живые инструменты, честные тексты и тепло, которое остаётся после концерта.</p>
+  <div class="btns">
+   <a class="btn fill" href="#">Слушать музыку</a>
+   <a class="btn ghostbtn" href="#">Ближайшие концерты</a>
+  </div>
+ </div>
+ <div class="hero__right">
+  <div class="badge">
+   <svg viewBox="0 0 200 200">
+    <defs><path id="c" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs>
+    <text><textPath href="#c" startOffset="0">ЯЖИВУ • СЕЙЧАС • ЯЖИВУ • СЕЙЧАС • </textPath></text>
+   </svg>
+  </div>
+  <div class="duo">
+   <img src="img/hero-01.jpg" alt="ЯЖИВУ — группа в поле"/>
+   <div class="dots"></div>
+   <div class="cap">Казань / 25.10.26</div>
+  </div>
+ </div>
+</section>
+
+<div class="marquee"><div class="marquee__in">
+ <span>ЯЖИВУ — СЕЙЧАС!</span><span>★</span><span>ЖИВИ СЕЙЧАС</span><span>★</span><span>МУЗЫКА ДЛЯ ТЕХ, КТО ПРОДОЛЖАЕТ</span><span>★</span>
+ <span>ЯЖИВУ — СЕЙЧАС!</span><span>★</span><span>ЖИВИ СЕЙЧАС</span><span>★</span><span>МУЗЫКА ДЛЯ ТЕХ, КТО ПРОДОЛЖАЕТ</span><span>★</span>
+</div></div>
+
+<div class="ribbon"><div class="ribbon__bar"><div class="ribbon__in">
+ <span>ЯЖИВУ — СЕЙЧАС! ★ БИЛЕТЫ ОТКРЫТЫ ★ КАЗАНЬ 25.10.26 ★ ЯЖИВУ — СЕЙЧАС! ★ БИЛЕТЫ ОТКРЫТЫ ★ КАЗАНЬ 25.10.26 ★</span>
+</div></div></div>
+
+<section class="dates">
+ <div class="date"><div class="bg"><img src="img/hero-01.jpg" alt=""/></div>
+  <span class="st">Регистрация</span><span class="n">01</span><h3>Казань</h3><p>25.10.2026 · Клуб «В-3»</p></div>
+ <div class="date"><div class="bg"><img src="img/group-01.jpg" alt=""/></div>
+  <span class="st">Скоро</span><span class="n">02</span><h3>Москва</h3><p>дата скоро</p></div>
+ <div class="date"><div class="bg"><img src="img/box-01.jpg" alt=""/></div>
+  <span class="st">Скоро</span><span class="n">03</span><h3>Санкт-Петербург</h3><p>дата скоро</p></div>
+</section>
+
+</body>
+</html>
