@@ -81,26 +81,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 01b / HERO II — широкий кадр */}
-        <section
-          aria-label="Группа ЯЖИВУ"
-          className="relative bg-black text-white"
-        >
-          <div className="relative min-h-[60vh] w-full">
-            <Image
-              src="/images/hero/hero-02.jpg"
-              alt="ЯЖИВУ — группа на траве в сумерках"
-              fill
-              sizes="100vw"
-              className="object-cover object-center"
-            />
-            <div aria-hidden="true" className="absolute inset-0 bg-black/40" />
-            <p className="absolute bottom-8 left-1/2 w-[90%] max-w-6xl -translate-x-1/2 text-2xl font-black uppercase tracking-tight text-white sm:text-4xl lg:text-5xl">
-              ЯЖИВУ — СЕЙЧАС!
-            </p>
-          </div>
-        </section>
-
         {/* 02 / КТО МЫ */}
         <section
           id="about"
@@ -143,6 +123,18 @@ export default function Home() {
                   />
                 </div>
               </div>
+            </div>
+
+            {/* Атмосферный кадр на всю ширину (public/images/group) */}
+            <div className="relative mt-14 aspect-[21/9] w-full overflow-hidden border border-black/15">
+              <Image
+                src="/images/hero/hero-02.jpg"
+                alt="ЯЖИВУ — группа на траве в сумерках"
+                fill
+                sizes="(max-width: 768px) 100vw, 1152px"
+                className="object-cover object-center"
+              />
+              <div aria-hidden="true" className="absolute inset-0 bg-black/30" />
             </div>
           </div>
         </section>
