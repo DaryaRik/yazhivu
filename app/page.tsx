@@ -35,55 +35,57 @@ export default function Home() {
       <Header />
 
       <main>
-        {/* 01 / HERO */}
+        {/* 01 / HERO — текст слева, фото группы в горизонтальной рамке справа (как в макете) */}
         <section
           id="hero"
-          className="relative bg-black text-white"
+          className="relative overflow-hidden bg-black text-white"
           aria-labelledby="hero-title"
         >
-          <div className="relative mx-auto grid min-h-[80vh] w-full max-w-6xl items-center gap-12 px-5 py-24 lg:grid-cols-[1.05fr_0.95fr]">
-          {/* Фото группы в горизонтальном формате (public/images/hero), масштаб +8%, в рамке с наклоном */}
-          <div className="relative order-2 lg:order-none">
-            <div
-              className="relative aspect-[3/2] w-full origin-center overflow-hidden border border-white/15 shadow-[20px_20px_0_rgba(185,143,6,0.16)]"
-              style={{ transform: "rotate(-1.4deg) scale(1.08)" }}
-            >
-              <Image
-                src="/images/hero/hero-01.jpg"
-                alt="Группа ЯЖИВУ — вся группа"
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover object-center grayscale"
-              />
-            </div>
-          </div>
-          <div className="relative order-1 flex flex-col justify-center lg:order-none">
-            <SectionLabel number="01" title="HERO" inverted />
-            <h1
-              id="hero-title"
-              className="mt-8 text-5xl font-black uppercase leading-[0.95] tracking-tight sm:text-7xl lg:text-8xl"
-            >
-              ЯЖИВУ — СЕЙЧАС!
-            </h1>
-            <p className="mt-6 max-w-xl text-lg text-white/70 sm:text-xl">
-              Музыка для тех, кто продолжает.
-            </p>
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <a
-                href="#music"
-                className="border border-yellow bg-yellow px-8 py-4 text-sm font-bold uppercase tracking-[0.15em] text-black transition-colors hover:bg-transparent hover:text-yellow"
+          <div className="relative mx-auto grid min-h-[80vh] w-full max-w-6xl items-center gap-14 px-5 py-24 lg:grid-cols-[1.05fr_0.95fr]">
+            <div className="relative order-1 flex flex-col justify-center lg:order-none">
+              <SectionLabel number="01" title="HERO" inverted />
+              <h1
+                id="hero-title"
+                className="mt-8 text-5xl font-black uppercase leading-[0.95] tracking-tight sm:text-7xl lg:text-8xl"
               >
-                Слушать музыку
-              </a>
-              <a
-                href="#concerts"
-                className="border border-white/40 px-8 py-4 text-sm font-bold uppercase tracking-[0.15em] text-white transition-colors hover:border-yellow hover:text-yellow"
-              >
-                Ближайшие концерты
-              </a>
+                ЯЖИВУ
+                <span className="mt-3 block text-transparent [-webkit-text-stroke:1.1px_#e8bc0a] text-[0.46em] tracking-[0.06em] text-yellow">
+                  — сейчас!
+                </span>
+              </h1>
+              <p className="mt-6 max-w-xl text-lg text-white/70 sm:text-xl">
+                Музыка для тех, кто продолжает.
+              </p>
+              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+                <a
+                  href="#music"
+                  className="border border-yellow bg-yellow px-8 py-4 text-center text-sm font-bold uppercase tracking-[0.15em] text-black transition-colors hover:bg-transparent hover:text-yellow"
+                >
+                  Слушать музыку
+                </a>
+                <a
+                  href="#concerts"
+                  className="border border-white/40 px-8 py-4 text-center text-sm font-bold uppercase tracking-[0.15em] text-white transition-colors hover:border-yellow hover:text-yellow"
+                >
+                  Ближайшие концерты
+                </a>
+              </div>
             </div>
-          </div>
+            <div className="relative order-2 lg:order-none">
+              <div
+                className="relative aspect-[3/2] w-full origin-center overflow-hidden border border-white/15 shadow-[20px_20px_0_rgba(185,143,6,0.16)]"
+                style={{ transform: "rotate(-1.4deg) scale(1.08)" }}
+              >
+                <Image
+                  src="/images/hero/hero-01.jpg"
+                  alt="ЯЖИВУ — вся группа"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover object-center grayscale"
+                />
+              </div>
+            </div>
           </div>
         </section>
 
@@ -541,21 +543,31 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 11 / ФИНАЛЬНЫЙ ЭКРАН */}
+        {/* 11 / ФИНАЛ */}
         <section
           id="final"
           className="bg-black text-white"
           aria-labelledby="final-title"
         >
-          <div className="mx-auto flex min-h-[70vh] w-full max-w-6xl flex-col items-center justify-center px-5 py-32 text-center">
-            <SectionLabel number="11" title="ФИНАЛЬНЫЙ ЭКРАН" inverted />
+          <div className="mx-auto flex min-h-[76vh] w-full max-w-6xl flex-col items-center justify-center px-5 py-32 text-center">
+            <SectionLabel number="11" title="ФИНАЛ" inverted />
             <p
               id="final-title"
-              className="mt-10 text-5xl font-black uppercase leading-[0.95] tracking-tight sm:text-7xl lg:text-8xl"
+              className="mt-10 text-6xl font-black uppercase leading-[1.04] tracking-tight text-yellow sm:text-8xl lg:text-9xl"
             >
-              ЯЖИВУ — СЕЙЧАС!
+              ЯЖИВУ
+              <span className="block text-transparent [-webkit-text-stroke:1.2px_#e8bc0a]">
+                — сейчас!
+              </span>
             </p>
-            <p className="mt-6 text-lg text-white/60">Жизнь продолжается.</p>
+            <div className="mt-12">
+              <a
+                href="#concerts"
+                className="inline-block border border-yellow bg-yellow px-10 py-4 text-sm font-bold uppercase tracking-[0.2em] text-black transition-colors hover:bg-transparent hover:text-yellow"
+              >
+                Прийти на концерт
+              </a>
+            </div>
           </div>
         </section>
       </main>
