@@ -180,6 +180,14 @@ h1 .now{display:block;color:transparent;-webkit-text-stroke:1.1px var(--yellow);
 .box__grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:44px}
 .box__grid .duo{aspect-ratio:3/2}
 .box__cta{margin-top:34px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
+.bcard{position:relative;aspect-ratio:4/5;border:1px solid var(--line);background:#111010;border-radius:10px;
+  padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.bcard p{font-weight:700;text-transform:uppercase;font-size:clamp(17px,1.9vw,23px);line-height:1.14;color:var(--yellow)}
+.bcard span{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);
+  border-top:1px solid var(--line);padding-top:12px;margin-top:14px}
+.bcard::after{content:'';position:absolute;inset:0;mix-blend-mode:soft-light;opacity:.3;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.08) .9px,transparent 1.1px);background-size:4px 4px}
 
 /* ---------- 09 НОВОСТИ / 08 МЕРЧ / заглушки ---------- */
 .empty{margin-top:44px;border:1px dashed var(--line);padding:60px 30px;text-align:center}
@@ -197,7 +205,8 @@ h1 .now{display:block;color:transparent;-webkit-text-stroke:1.1px var(--yellow);
 
 /* ---------- 11 ФИНАЛ ---------- */
 .final{min-height:76vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
-.final .big{font-size:clamp(46px,11vw,140px);font-weight:700;line-height:.88;text-transform:uppercase;color:var(--yellow)}
+.final .big{font-size:clamp(44px,10vw,128px);font-weight:700;line-height:1.04;text-transform:uppercase;color:var(--yellow);letter-spacing:-.01em}
+.final .big .l2{display:block;margin-top:.12em;color:transparent;-webkit-text-stroke:1.2px var(--yellow);opacity:.92}
 
 /* ---------- FOOTER ---------- */
 footer{background:var(--deep);color:var(--txt);border-top:1px solid var(--line);padding:70px 40px 40px}
@@ -223,12 +232,13 @@ footer{background:var(--deep);color:var(--txt);border-top:1px solid var(--line);
  .gig__r{border-left:none;border-top:1px solid var(--lined)}
  .gal{grid-template-columns:repeat(2,1fr)}
  .gal .duo:nth-child(2),.gal .duo:nth-child(4){transform:none}
+ .cards{grid-template-columns:1fr 1fr}
  .foot__grid{grid-template-columns:1fr}
  .marquee__in{font-size:19px}
  .grain{opacity:.07}
 }
 </style>
-<meta name="robots" content="noindex,nofollow"/></head>
+</head>
 <body>
 <!-- ДЮОТОН: тени -> чёрный, света -> тёплое золото -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -288,8 +298,8 @@ footer{background:var(--deep);color:var(--txt);border-top:1px solid var(--line);
   <h2 class="h2 rv">Кто мы</h2>
   <div class="about__grid">
    <div class="rv">
-    <p class="lead">Материалы о группе будут добавлены. Здесь появится честный рассказ о том, кто мы и зачем делаем эту музыку.</p>
-    <p class="lead" style="margin-top:18px">ЯЖИВУ — это про то, что жизнь продолжается. Каждый концерт, каждая песня и каждая встреча с вами напоминает: пока мы вместе — мы живы.</p>
+    <p class="lead">«ЯЖИВУ» — инди-рок-группа из Казани, возникшая из случайных встреч, джемов и людей, которые однажды пересеклись в одном месте.</p>
+    <p class="lead" style="margin-top:18px">Мы соединяем разные жанры, инструменты и истории, чтобы говорить о главном: жизнь происходит не во вчерашних проблемах и не в завтрашних запарах. Настоящая жизнь происходит <em style="color:var(--gold);font-style:normal">прямо сейчас</em>.</p>
    </div>
    <div class="about__ph rv">
     <div class="a"><img src="img/group-01.jpg" alt="ЯЖИВУ — ночной портрет"/></div>
@@ -366,7 +376,11 @@ footer{background:var(--deep);color:var(--txt);border-top:1px solid var(--line);
  <div class="wrap">
   <div class="slabel rv"><b>06</b><span>Сообщество</span></div>
   <h2 class="h2 rv">Сообщество</h2>
-  <p class="lead rv">Мы вместе. Делитесь своим «я живу». Вдохновляй других.</p>
+  <p class="lead rv">Мы вместе. Делитесь своим «я живу» — снимайте карточки, платки, моменты с концертов и отмечайте нас с тегом <b>#яживу</b>. Лучшее покажем здесь.</p>
+  <div class="btns rv">
+   <a class="btn" href="#" target="_blank" rel="noopener">Поделиться в Telegram</a>
+   <a class="btn" href="#" target="_blank" rel="noopener">Мы в VK</a>
+  </div>
   <div class="gal">
    <div class="duo rv"><img src="img/community-01.jpg" alt="Кадр с поднятой рукой"/><div class="dots"></div></div>
    <div class="duo rv"><img src="img/community-02.jpg" alt="Кадр у дерева"/><div class="dots"></div></div>
@@ -381,11 +395,16 @@ footer{background:var(--deep);color:var(--txt);border-top:1px solid var(--line);
  <div class="wrap">
   <div class="slabel rv"><b>07</b><span>BOX</span></div>
   <h2 class="h2 rv">Собираем первый выпуск</h2>
-  <p class="lead rv">Музыка, карточки, вещи и маленькие действия, которые остаются с тобой после концерта.</p>
-  <div class="box__grid">
-   <div class="duo rv"><img src="img/box-01.jpg" alt="Кадр для первого выпуска BOX"/><div class="dots"></div></div>
-   <div class="duo rv"><img src="img/box-02.jpg" alt="Деталь для первого выпуска BOX"/><div class="dots"></div></div>
+  <p class="lead rv">Музыка, карточки, платки и маленькие действия, которые остаются с тобой после концерта. Каждая карточка — короткое напоминание о главном.</p>
+  <div class="cards">
+   <div class="bcard rv"><p>Жизнь не&nbsp;совершенна, но&nbsp;в&nbsp;ней есть ты. И&nbsp;это уже много.</p><span>яживу ___</span></div>
+   <div class="bcard rv"><p>Ты уже пережил все свои самые плохие дни.</p><span>яживу ___</span></div>
+   <div class="bcard rv"><p>Не&nbsp;жди идеального момента. Создай его сам.</p><span>яживу ___</span></div>
+   <div class="bcard rv"><p>Не&nbsp;всё будет хорошо. Но&nbsp;ты будешь.</p><span>яживу ___</span></div>
+   <div class="bcard rv"><p>Не&nbsp;торопись становиться кем-то.</p><span>яживу ___</span></div>
+   <div class="bcard rv"><p>Иногда шаг вперёд — это&nbsp;просто не&nbsp;сделать шаг назад.</p><span>яживу ___</span></div>
   </div>
+  <p class="soon rv" style="color:var(--mut)">Платки и фото выпуска добавим, когда будут готовы файлы</p>
   <div class="box__cta rv"><a class="btn btn--fill" href="#subscribe">Узнать первым</a></div>
  </div>
 </section>
@@ -394,9 +413,12 @@ footer{background:var(--deep);color:var(--txt);border-top:1px solid var(--line);
 <section id="merch" class="sec paper">
  <div class="wrap">
   <div class="slabel rv"><b>08</b><span>Мерч</span></div>
-  <h2 class="h2 rv">Мерч / Скоро</h2>
-  <p class="lead rv">Вещи ЯЖИВУ сейчас в работе.</p>
-  <div class="empty rv"><p>Первая коллекция скоро</p></div>
+  <h2 class="h2 rv">Мерч</h2>
+  <p class="lead rv">Футболки ЯЖИВУ — носи своё «я живу». Больше вещей скоро.</p>
+  <div class="box__grid">
+   <div class="duo rv"><img src="img/box-01.jpg" alt="Футболка ЯЖИВУ"/><div class="dots"></div></div>
+   <div class="duo rv"><img src="img/box-02.jpg" alt="Футболка ЯЖИВУ — деталь"/><div class="dots"></div></div>
+  </div>
  </div>
 </section>
 
@@ -432,7 +454,7 @@ footer{background:var(--deep);color:var(--txt);border-top:1px solid var(--line);
 <section class="sec black">
  <div class="wrap final">
   <div class="slabel rv" style="justify-content:center"><b>11</b><span>Финал</span></div>
-  <p class="big rv" style="margin-top:34px">ЯЖИВУ<br>— СЕЙЧАС!</p>
+  <p class="big rv" style="margin-top:34px">ЯЖИВУ<span class="l2">— сейчас!</span></p>
   <div class="btns rv" style="justify-content:center;margin-top:40px">
    <a class="btn btn--fill" href="#concerts">Прийти на концерт</a>
   </div>
@@ -452,7 +474,9 @@ footer{background:var(--deep);color:var(--txt);border-top:1px solid var(--line);
   </div>
   <div>
    <h4>Мы на связи</h4>
-   <a>VK</a><a>Telegram</a><a>YouTube</a>
+   <a href="https://vk.ru/i_live_mus" target="_blank" rel="noopener">VK</a>
+   <a href="https://t.me/i_live_mus" target="_blank" rel="noopener">Telegram</a>
+   <a href="https://youtu.be/7pJ4wU9J2uw" target="_blank" rel="noopener">YouTube</a>
   </div>
  </div>
  <div class="foot__bot">
