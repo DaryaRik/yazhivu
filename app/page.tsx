@@ -2,7 +2,6 @@ import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
-import SubscribeForm from "@/components/SubscribeForm";
 import { siteConfig } from "@/config/site";
 import { musicReleases } from "@/data/music";
 import { concerts, formatConcertDate } from "@/data/concerts";
@@ -517,7 +516,27 @@ export default function Home() {
               Подпишись и не пропусти главное
             </h2>
             <div className="mt-10">
-              <SubscribeForm />
+              <p className="mb-6 max-w-xl text-lg text-white/70">
+                Новости, даты концертов, старт продаж BOX и мерча — первым делом в соцсетях.
+              </p>
+              <div className="flex flex-col gap-4 sm:flex-row">
+                <a
+                  href={siteConfig.socialLinks.telegram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="border border-yellow bg-yellow px-8 py-4 text-center text-sm font-bold uppercase tracking-[0.15em] text-black transition-colors hover:bg-transparent hover:text-yellow"
+                >
+                  Подписаться в Telegram
+                </a>
+                <a
+                  href={siteConfig.socialLinks.vk}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="border border-white/40 px-8 py-4 text-center text-sm font-bold uppercase tracking-[0.15em] text-white transition-colors hover:border-yellow hover:text-yellow"
+                >
+                  Подписаться в VK
+                </a>
+              </div>
             </div>
           </div>
         </section>
