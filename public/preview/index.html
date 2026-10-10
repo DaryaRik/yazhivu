@@ -112,11 +112,8 @@ h1 .now{display:block;color:transparent;-webkit-text-stroke:1.1px var(--yellow);
   letter-spacing:.2em;color:#000;background:var(--yellow);padding:4px 8px;text-transform:uppercase}
 
 
-/* вырезанная группа на чёрном */
-.cutout{position:relative;z-index:2;display:flex;align-items:flex-end;justify-content:center}
-.cutout img{width:118%;max-width:none;height:auto;margin-left:-9%;filter:grayscale(.85) sepia(.45) saturate(1.5) hue-rotate(-12deg) contrast(1.08);
-  filter:drop-shadow(0 0 40px rgba(232,188,10,.12))}
-.hero__right{align-self:end}
+/* Hero: горизонтальный формат, все участники в кадре */
+.hero .duo img{aspect-ratio:3/2}
 .subbtns{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
 .subbtns .btn{flex:0 0 auto}
 @media(max-width:960px){.subbtns{flex-direction:column}.subbtns .btn{text-align:center}}
@@ -247,6 +244,9 @@ footer{background:var(--deep);color:var(--txt);border-top:1px solid var(--line);
  .marquee__in{font-size:19px}
  .grain{opacity:.07}
 }
+
+.boxphoto img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;filter:url(#duotone)}
+.boxphoto{aspect-ratio:4/5}
 </style>
 </head>
 <body>
@@ -288,8 +288,10 @@ footer{background:var(--deep);color:var(--txt);border-top:1px solid var(--line);
    <defs><path id="c" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs>
    <text><textPath href="#c" startOffset="0">ЯЖИВУ • СЕЙЧАС • ЯЖИВУ • СЕЙЧАС • </textPath></text>
   </svg></div>
-  <div class="cutout">
-   <img src="img/group-cut.webp" alt="ЯЖИВУ — вся группа"/>
+  <div class="duo">
+   <img src="img/hero-01.jpg" alt="ЯЖИВУ — группа в поле"/>
+   <div class="dots"></div>
+   <div class="cap">Казань / 25.10.26</div>
   </div>
  </div>
 </section>
@@ -403,16 +405,12 @@ footer{background:var(--deep);color:var(--txt);border-top:1px solid var(--line);
  <div class="wrap">
   <div class="slabel rv"><b>07</b><span>BOX</span></div>
   <h2 class="h2 rv">Собираем первый выпуск</h2>
-  <p class="lead rv">Музыка, карточки, платки и маленькие действия, которые остаются с тобой после концерта. Каждая карточка — короткое напоминание о главном.</p>
-  <div class="cards">
-   <div class="bcard rv"><p>Жизнь не&nbsp;совершенна, но&nbsp;в&nbsp;ней есть ты. И&nbsp;это уже много.</p><span>яживу ___</span></div>
-   <div class="bcard rv"><p>Ты уже пережил все свои самые плохие дни.</p><span>яживу ___</span></div>
-   <div class="bcard rv"><p>Не&nbsp;жди идеального момента. Создай его сам.</p><span>яживу ___</span></div>
-   <div class="bcard rv"><p>Не&nbsp;всё будет хорошо. Но&nbsp;ты будешь.</p><span>яживу ___</span></div>
-   <div class="bcard rv"><p>Не&nbsp;торопись становиться кем-то.</p><span>яживу ___</span></div>
-   <div class="bcard rv"><p>Иногда шаг вперёд — это&nbsp;просто не&nbsp;сделать шаг назад.</p><span>яживу ___</span></div>
+  <p class="lead rv">Что-то маленькое и настоящее уже в работе.</p>
+  <div class="box__grid rv">
+   <div class="duo boxphoto"><img src="img/box-cards-1.jpg" alt="Карточки ЯЖИВУ"/><div class="dots"></div></div>
+   <div class="duo boxphoto"><img src="img/box-cards-2.jpg" alt="Карточки ЯЖИВУ — выпуск"/><div class="dots"></div></div>
   </div>
-  <p class="soon rv" style="color:var(--mut)">Платки и фото выпуска добавим, когда будут готовы файлы</p>
+  <p class="soon rv" style="color:var(--mut)">Первый выпуск уже готовится. Скоро расскажем.</p>
   <div class="box__cta rv"><a class="btn btn--fill" href="#subscribe">Узнать первым</a></div>
  </div>
 </section>
