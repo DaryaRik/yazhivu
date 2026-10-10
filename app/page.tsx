@@ -2,7 +2,6 @@ import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
-import SubscribeForm from "@/components/SubscribeForm";
 import { siteConfig } from "@/config/site";
 import { musicReleases } from "@/data/music";
 import { concerts, formatConcertDate } from "@/data/concerts";
@@ -42,18 +41,20 @@ export default function Home() {
           className="relative bg-black text-white"
           aria-labelledby="hero-title"
         >
-          {/* Фоновое изображение hero (public/images/hero) */}
-          <Image
-            src="/images/hero/hero-01.jpg"
-            alt="Группа ЯЖИВУ в поле на закате"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-center"
-          />
-          {/* Затемнение, чтобы текст читался поверх фото */}
-          <div aria-hidden="true" className="absolute inset-0 bg-black/55" />
-          <div className="relative mx-auto flex min-h-[80vh] w-full max-w-6xl flex-col justify-center px-5 py-24">
+          <div className="relative mx-auto grid min-h-[80vh] w-full max-w-6xl items-center gap-10 px-5 py-24 lg:grid-cols-[1fr_1.1fr]">
+          {/* Вся группа — вырезанная от фона, на чёрном (public/images/hero) */}
+          <div className="relative order-2 flex items-end justify-center lg:order-none lg:h-full">
+            <Image
+              src="/images/hero/group-cut.webp"
+              alt="ЯЖИВУ — вся группа"
+              width={1551}
+              height={905}
+              priority
+              sizes="(max-width: 1024px) 100vw, 55vw"
+              className="h-auto w-full"
+            />
+          </div>
+          <div className="relative order-1 flex flex-col justify-center lg:order-none">
             <SectionLabel number="01" title="HERO" inverted />
             <h1
               id="hero-title"
@@ -78,6 +79,7 @@ export default function Home() {
                 Ближайшие концерты
               </a>
             </div>
+          </div>
           </div>
         </section>
 
@@ -397,27 +399,32 @@ export default function Home() {
               тобой после концерта.
             </p>
 
-            {/* Кадры, из которых собирается первый выпуск BOX (public/images/box) */}
-            <div className="mt-10 grid gap-4 sm:grid-cols-2">
-              <div className="relative aspect-[3/2] w-full overflow-hidden border border-white/15">
-                <Image
-                  src="/images/box/box-01.jpg"
-                  alt="ЯЖИВУ — кадр для первого выпуска BOX"
-                  fill
-                  sizes="(max-width: 640px) 100vw, 50vw"
-                  className="object-cover object-center"
-                />
-              </div>
-              <div className="relative aspect-[3/2] w-full overflow-hidden border border-white/15">
-                <Image
-                  src="/images/box/box-02.jpg"
-                  alt="ЯЖИВУ — деталь для первого выпуска BOX"
-                  fill
-                  sizes="(max-width: 640px) 100vw, 50vw"
-                  className="object-cover object-center"
-                />
-              </div>
-            </div>
+            {/* Карточки выпуска BOX — цитаты в фирменных цветах */}
+            <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {[
+                "Жизнь не совершенна, но в ней есть ты. И это уже много.",
+                "Ты уже пережил все свои самые плохие дни.",
+                "Не жди идеального момента. Создай его сам.",
+                "Не всё будет хорошо. Но ты будешь.",
+                "Не торопись становиться кем-то.",
+                "Иногда шаг вперёд — это просто не сделать шаг назад.",
+              ].map((text) => (
+                <li
+                  key={text}
+                  className="flex aspect-square flex-col justify-between border border-white/15 bg-[#111010] p-6"
+                >
+                  <p className="text-xl font-black uppercase leading-tight text-yellow sm:text-2xl">
+                    {text}
+                  </p>
+                  <span className="border-t border-white/15 pt-3 text-xs font-bold uppercase tracking-[0.2em] text-white/50">
+                    яживу
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-8 text-white/60">
+              Скоро добавим фото выпуска.
+            </p>
 
             <div className="mt-10">
               {telegramUrl ? (
@@ -528,7 +535,27 @@ export default function Home() {
               Подпишись и не пропусти главное
             </h2>
             <div className="mt-10">
-              <SubscribeForm />
+              <p className="mb-6 max-w-xl text-lg text-white/70">
+                Новости, даты концертов, старт продаж BOX и мерча — первым делом в соцсетях.
+              </p>
+              <div className="flex flex-col gap-4 sm:flex-row">
+                <a
+                  href={siteConfig.socialLinks.telegram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="border border-yellow bg-yellow px-8 py-4 text-center text-sm font-bold uppercase tracking-[0.15em] text-black transition-colors hover:bg-transparent hover:text-yellow"
+                >
+                  Подписаться в Telegram
+                </a>
+                <a
+                  href={siteConfig.socialLinks.vk}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="border border-white/40 px-8 py-4 text-center text-sm font-bold uppercase tracking-[0.15em] text-white transition-colors hover:border-yellow hover:text-yellow"
+                >
+                  Подписаться в VK
+                </a>
+              </div>
             </div>
           </div>
         </section>
