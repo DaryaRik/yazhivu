@@ -42,18 +42,24 @@ export default function Home() {
           className="relative bg-black text-white"
           aria-labelledby="hero-title"
         >
-          {/* Фоновое изображение hero (public/images/hero) */}
-          <Image
-            src="/images/hero/hero-01.jpg"
-            alt="Группа ЯЖИВУ в поле на закате"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-center"
-          />
-          {/* Затемнение, чтобы текст читался поверх фото */}
-          <div aria-hidden="true" className="absolute inset-0 bg-black/55" />
-          <div className="relative mx-auto flex min-h-[80vh] w-full max-w-6xl flex-col justify-center px-5 py-24">
+          <div className="relative mx-auto grid min-h-[80vh] w-full max-w-6xl items-center gap-12 px-5 py-24 lg:grid-cols-[1.05fr_0.95fr]">
+          {/* Фото группы в горизонтальном формате (public/images/hero), масштаб +8%, в рамке с наклоном */}
+          <div className="relative order-2 lg:order-none">
+            <div
+              className="relative aspect-[3/2] w-full origin-center overflow-hidden border border-white/15 shadow-[20px_20px_0_rgba(185,143,6,0.16)]"
+              style={{ transform: "rotate(-1.4deg) scale(1.08)" }}
+            >
+              <Image
+                src="/images/hero/hero-01.jpg"
+                alt="Группа ЯЖИВУ — вся группа"
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover object-center grayscale"
+              />
+            </div>
+          </div>
+          <div className="relative order-1 flex flex-col justify-center lg:order-none">
             <SectionLabel number="01" title="HERO" inverted />
             <h1
               id="hero-title"
@@ -78,6 +84,7 @@ export default function Home() {
                 Ближайшие концерты
               </a>
             </div>
+          </div>
           </div>
         </section>
 
@@ -397,27 +404,9 @@ export default function Home() {
               тобой после концерта.
             </p>
 
-            {/* Кадры, из которых собирается первый выпуск BOX (public/images/box) */}
-            <div className="mt-10 grid gap-4 sm:grid-cols-2">
-              <div className="relative aspect-[3/2] w-full overflow-hidden border border-white/15">
-                <Image
-                  src="/images/box/box-01.jpg"
-                  alt="ЯЖИВУ — кадр для первого выпуска BOX"
-                  fill
-                  sizes="(max-width: 640px) 100vw, 50vw"
-                  className="object-cover object-center"
-                />
-              </div>
-              <div className="relative aspect-[3/2] w-full overflow-hidden border border-white/15">
-                <Image
-                  src="/images/box/box-02.jpg"
-                  alt="ЯЖИВУ — деталь для первого выпуска BOX"
-                  fill
-                  sizes="(max-width: 640px) 100vw, 50vw"
-                  className="object-cover object-center"
-                />
-              </div>
-            </div>
+            <p className="mt-10 text-lg text-white/60">
+              Первый выпуск уже готовится. Скоро расскажем.
+            </p>
 
             <div className="mt-10">
               {telegramUrl ? (
